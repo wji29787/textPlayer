@@ -14,7 +14,7 @@
 </head>
 <style>
     .playApp{
-        height: 800px;
+        height: 900px;
     }
     .ulA{
         width: 100px;
@@ -31,11 +31,23 @@
         width: 800px;
         border: 1px solid gold;
     }
-    .ulB ul>li{
+    .ulB .ulB-a{
+        width: 100%;
+        height: calc(100% - 100px);
+    }
+    .ulB .ulB-a>li{
         float: left;
-        height: 400px;
+        height: 50%;
         /* border:1px solid red; */
-        width: 400px;
+        width: 50%;
+        background-color:greenyellow;
+    }
+    .ulB .ulB-b >li {
+        float: left;
+        margin-right: 20px;
+        width: 100px;
+        height: 50px;
+        background-color: skyblue;
     }
 </style>
 <body>
@@ -102,7 +114,7 @@
             template:`<div class="playApp">
                    <div class="ulA fl">
                     <ul>
-                    <li>A1</li>
+                    <li>A1{{msg}}</li>
                     <li>A2</li>
                     <li>A3</li>
                     <li>A4</li>
@@ -110,25 +122,36 @@
                     </div>
                    
                     <div class="ulB fl">
-                        <ul>
-                        <li>B1</li>
-                        <li>B2</li>
-                        <li>B3</li>
-                        <!--<li>B4</li>-->    
+                        <ul class="ulB-a">
+                        <li v-for="n in boxs">B{{n}}</li>   
+                    </ul>
+                    <ul class="ulB-b">
+                     <li @click="fnClick(1)">1</li>
+                     <li @click="fnClick(2)">2</li> 
+                     <li @click="fnClick(3)">3</li> 
+                     <li @click="fnClick(4)">4</li>    
                     </ul> 
                     </div>
                     
                 </div>`,
             data() {
                 return {
-                    msg:"你好"
+                    msg:"你好",
+                    boxs:4
                 };
             },
             created () {
                 
             },
             methods: {
-                
+                fnClick($index){
+                    if($index>this.boxs){
+                       
+                    }else{
+
+                    }
+                    this.boxs=$index;
+                }
             }
 
         });
