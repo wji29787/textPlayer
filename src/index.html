@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./jqTest.js"> -->
+    <!-- <link rel="stylesheet" href="../assetjs/jquery/jquery-1.11.2.min.js"> -->
+    <!-- <script type="text/javascript" src="./jqTest.js"></script> -->
+    <link rel="stylesheet" href="./css/common/base.css">
+    <script src="./assetjs/vue/vue.js"></script>
+</head>
+<style>
+    .playApp{
+        height: 800px;
+    }
+    .ulA{
+        width: 100px;
+        height: 100%;
+        margin-right: 100px;
+     }
+    .ulA li{
+      width: 100%;
+      height: 50px;
+      border: 1px solid gold;
+    }
+    .ulB {
+        height: 100%;
+        width: 800px;
+        border: 1px solid gold;
+    }
+    .ulB li{
+        float: left;
+        height: 50%;
+        /* border:1px solid red; */
+        width: 50%;
+    }
+</style>
+<body>
+    <div class="div">
+        hahahahaSDFasdfad sdfsf 士大的aa
+    </div>
+    
+    <!-- <div>
+        <form action="upload" method="POST" enctype="multipart/form-data">
+             <input type="file" name="file"/>
+             <br>
+             <input type="submit" value="submit" name="submit">
+        </form>
+    </div> -->
+    <div id="app">
+        
+    </div>
+    <script>
+        // var ab={a:1,b:2};
+        // //alert('a' in ab);
+        // function Person(){
+        //     this.x=0;
+        //     this.y=0;
+        //     this.method1=function(){}
+        // }
+        // Person.prototype.method2=function(x,y){
+        //     this.x+=x;
+        //     this.y+=y;
+        //     console.info("Person method");
+        // }
+        // function Man(){
+        //     Person.call(this);
+        // }
+        // Man.prototype=Object.create(Person.prototype);
+        // Man.prototype.constructor=Man;
+
+        // // Man.prototype.m2=function(){}
+        // var m=new Man();
+        //    console.log(m);
+        // for(var a in m.__proto__){
+        //     console.log(a);//
+        // }
+        // var m1=Object.getPrototypeOf(m);
+        // //console.log(m1);
+        // for(var b in m1){
+        //     console.log(b);
+        // }
+        // console.log(m1===m.__proto__);
+        // var obj=Object.create(ab,{
+        //     z:{
+        //         value:5,
+        //         writable:true,
+        //         enumerable:true,
+        //         configurable:true
+        //     }
+        // });
+        // obj.z=11;
+        // obj.q=12;
+        // console.log(obj.q);
+        // for(var prop in obj){
+        //     console.log(prop+"------"+obj[prop]);
+        // }
+        Vue.component('boxPlayer',{
+            template:`<div class="playApp">
+                   <ul class="ulA fl">
+                    <li>A1</li>
+                    <li>A2</li>
+                    <li>A3</li>
+                    <li>A4</li>
+                    </ul>
+                    <ul class="ulB fl">
+                        <li>B1</li>
+                        <li>B2</li>
+                        <li>B3</li>
+                        <li>B4</li>    
+                    </ul> 
+                </div>`,
+            data() {
+                return {
+                    msg:"你好"
+                };
+            },
+            created () {
+                
+            },
+            methods: {
+                
+            }
+
+        });
+            
+        var vm=new Vue({
+            el:"#app",
+            data:{
+
+            },
+            render:c=> c('box-player')
+
+        })
+    </script>
+</body>
+
+</html>
