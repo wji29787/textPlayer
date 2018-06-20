@@ -54,6 +54,9 @@
         float: left;
         background-color:greenyellow;
     }
+    .ulB .ulB-a>li.active{
+        box-shadow: 0 0 0.35rem red inset;
+    }
     .ulB .ulB-a1>li{ height: 100%; width: 100%;}
     .ulB .ulB-a2>li{height: 100%; width: 50%;}
     .ulB .ulB-a3>li{height: 50%;width: 50%;}
@@ -145,8 +148,25 @@
         // });
        // var  drag=new dragDivv();
        // drag.$mount('.playApp');
+       var util={
+           //相对视窗的偏离位置
+             getOffset:function(el){
+                 var offSet={
+                     top:0,
+                     left:0
+                 },node=el;
+
+                 while(node!==null){
+                     offSet.left+=node.offsetLeft;
+                     offSet.top+=node.offsetTop;
+                     node=node.offsetParent;
+                 }
+                 return offSet;
+             },
+
+       };
         var dragDiv=Vue.component('dragBox',{
-                        template:`<div class="dragDiv" :style="style">{{msg}}</div>`,
+                        template:`<div class="dragDiv" :style="style"><slot></slot>{{msg}}</div>`,
                         props:{
                           style:{
                               type:Object,
@@ -163,6 +183,9 @@
                             return{
                                 msg:"I AM drag"
                             }
+                        },
+                        created:function(){
+                            console.log(this.$attrs,22);
                         }
                     });
            
@@ -177,16 +200,16 @@
                    
                     <div class="ulB fl">
                         <ul class="ulB-a" :class="liStyle">
-                        <li v-for="(item,$index) in boxs" @mouseenter="dragEnter($event)">B{{item}}</li>   
-                    </ul>
-                    <ul class="ulB-b">
-                     <li @click="fnClick(1)">1</li>
-                     <li @click="fnClick(2)">2</li> 
-                     <li @click="fnClick(3)">3</li> 
-                     <li @click="fnClick(4)">4</li>    
-                    </ul> 
+                            <li v-for="(item,$index) in boxs" slot="head" @mouseenter="dragEnter($event)" :class="[$index==activeIndex?'active':'']">B{{item}}</li>   
+                        </ul>
+                        <ul class="ulB-b">
+                            <li @click="fnClick(1)">1</li>
+                            <li @click="fnClick(2)">2</li> 
+                            <li @click="fnClick(3)">3</li> 
+                            <li @click="fnClick(4)">4</li>    
+                        </ul> 
                     </div>
-                    <drag-box :style="drapData"></drag-box>
+                    <drag-box :style="drapData">qwwe</drag-box>
                 </div>`,
             data() {
                 return {
@@ -197,11 +220,29 @@
                     dragging:null,//移动状态
                     diffx:0,
                     diffy:0,//移动元素与鼠标的相对偏移量
-                    drapData:{top:"100px",left:"200px"} //移动元素坐标
+                    drapData:{top:"100px",left:"200px"}, //移动元素坐标
+                    baseOffset:{},
+                    activeIndex:-1
+
                 };
             },
             created () {
                 
+            },
+            mounted () {
+                var playApp=document.getElementsByClassName('playApp'),
+                    playAppOffset=util.getOffset(playApp[0]),//相对窗口的偏移
+                    playUla=document.getElementsByClassName('ulB-a'),
+                    playUlaOffset={     //相对父元素的偏移
+                        top:playUla[0].offsetTop,
+                        left:playUla[0].offsetLeft,
+                        width:playUla[0].offsetWidth,
+                        height:playUla[0].offsetHeight
+                    };
+                    this.baseOffset.playAppOffset=playAppOffset;
+                    this.baseOffset.playUlaOffset=playUlaOffset;
+                // playUlaOffset.top=
+                //console.log(playUlaOffset);
             },
             methods: {
                 fnClick($index){
@@ -221,6 +262,7 @@
                         top:e.target.offsetTop+"px",
                         left:e.target.offsetLeft+"px",
                     }
+                    console.log(e.clientX,e.target.offsetLeft);
                     this.diffx=e.clientX-e.target.offsetLeft;
                     this.diffy=e.clientY-e.target.offsetTop;
                     this.dragging="target";
@@ -231,25 +273,48 @@
                         this.boxs[i].top=targetEls[i].offsetTop;
                         this.boxs[i].width=targetEls[i].offsetWidth;
                         this.boxs[i].height=targetEls[i].offsetHeight;
+                        this.boxs[i].el=targetEls[i];
+                        // console.log(util.getOffset(targetEls[i]));
                     }
                    // console.log(e.clientX);
                    // console.log(this.boxs);
                 },
                 //mouseMovie
                 dragMove:function(e){
+                    this.activeIndex=-1;
                      if(this.dragging!==null){
+                         //var top;
                         console.log("move");
+                        
                         this.drapData={
-                            top:(e.clientY-this.diffy)+"px",
-                            left:(e.clientX-this.diffx)+"px",
+                            top:(e.clientY-this.diffy)<0?0:(e.clientY-this.diffy)+"px",
+                            left:(e.clientX-this.diffx)<0?0:(e.clientX-this.diffx)+"px",
                             display:"block"
                         }
+                        var mouseX=e.clientX-this.baseOffset.playAppOffset.left;
+                        var mouseY=e.clientY-this.baseOffset.playAppOffset.top;
+                        if(mouseX>=this.baseOffset.playUlaOffset.left&&mouseY>=this.baseOffset.playUlaOffset.top){
+                            //  console.log(11);
+                            for(var i=0;i<this.boxs.length;i++){
+                                var box=this.boxs[i];
+                             
+                               if((mouseX-box.left<=box.width)&&(mouseX-box.left>0)&&(mouseY-box.top<=box.height)&&(mouseY-box.top>0)){
+                                   this.activeIndex=i;
+                                   console.log(11,i);
+                               }
+                            }   
+                        }
+                        
+                        // console.log(e.target);
                      }
                 },
                 //mouseUp
                 dragStop:function(e){
                     // console.log(e.target);
-                    console.log("stop");
+                    // console.log("stop");
+                    // console.log(e.target);
+                    // console.log(this.$slots,1);
+                  
                     if(this.boxs.length===1){
 
                     }
@@ -283,7 +348,7 @@
                    
                 },
                 dragEnter:function(e){
-                      
+                    //   console.log(e.target);
                     //  if(this.dragging!==null){
                     //     console.log(11);
                     //     console.log("enter");
@@ -365,6 +430,9 @@
             el:"#app",
             data:{
 
+            },
+            created:function(){
+                console.log(Vue.version);
             },
             render:c=> c('box-player')
 

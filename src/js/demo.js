@@ -78,7 +78,5 @@ process.on("uncaughtException",function(){
 // })
 // .listen(8080)
 function responseData(req,res){
-  switch (req.){
-
-  }
+  
 }
