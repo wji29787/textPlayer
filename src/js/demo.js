@@ -1,6 +1,8 @@
 var http =require('http');
 var fs=require('fs'); 
 var url=require('url');
+var {getTimeStr}=require('./common/common.js');
+
 // fs.readFile("./src/index.html",(err,data)=>{
 //     //console.log(__dirname);
 //     console.log("err=========>"+err);
@@ -9,13 +11,14 @@ var url=require('url');
 var server =http.createServer(function(req,res){
     // console.log(req.url);
     // console.log(res);
+    console.log(getTimeStr()+'====>   '+req.url,' === '+req.method);
     if(req.url=="/"){
         var fileList=fs.readdirSync('./');
         res.writeHead(200,{'Content-Type':'text/plain'});
         res.end(fileList.toString());
     }else if(req.url=="/src/index.html"){
         var path=req.url;
-        console.log(path,req.method);
+       // console.log(path,req.method);
         fs.readFile("."+path,function(err,data){
             if(err){
                 res.end("internal Error")
@@ -74,3 +77,8 @@ process.on("uncaughtException",function(){
 
 // })
 // .listen(8080)
+function responseData(req,res){
+  switch (req.){
+
+  }
+}
