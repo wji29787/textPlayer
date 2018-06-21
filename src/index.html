@@ -11,6 +11,7 @@
     <!-- <script type="text/javascript" src="./jqTest.js"></script> -->
     <link rel="stylesheet" href="./css/common/base.css">
     <script src="./assetjs/vue/vue.js"></script>
+    <script src="./assetjs/jwplayer/jwplayer.js"></script>
 </head>
 <style>
     .playApp{
@@ -62,6 +63,7 @@
     .ulB .ulB-a3>li{height: 50%;width: 50%;}
     .ulB .ulB-a3>li:last-of-type { margin: 0 auto;margin-left: 200px;}
     .ulB .ulB-a4>li{height: 50%;width: 50%; }
+    .ulB .ulB-a9>li{height: 33.33%;width: 33.33%;}
     .ulB .ulB-b >li {
         float: left;
         margin-right: 20px;
@@ -77,6 +79,8 @@
 <body>
     <div class="div">
         hahahahaSDFasdfad sdfsf 士大的aa
+        <!-- <div  class="playab" style="width:300px;height:300px;border: 1px solid red;"></div> -->
+        <!-- <div  class="playac" style="width:300px;height:300px;border: 1px solid red;"></div> -->
         <div id="app">
         
             </div>
@@ -165,6 +169,19 @@
              },
 
        };
+        // var div1=document.getElementById('playaa'); //
+        // var div1=document.getElementsByClassName('playab')[0];
+        // var div2=document.getElementsByClassName('playac')[0];
+        // console.log(div2);
+        // div1.id="sddd";
+        // div2.id="sefsf";
+        // var playaa=jwplayer(div1).setup({
+
+        // });
+        // var playac=jwplayer(div2).setup({
+
+        // });
+        // console.log(playaa);
         var dragDiv=Vue.component('dragBox',{
                         template:`<div class="dragDiv" :style="style"><slot></slot>{{msg}}</div>`,
                         props:{
@@ -194,7 +211,7 @@
             template:`<div class="playApp" @mousemove="dragMove($event)" @mouseup="dragStop($event)">
                    <div class="ulA fl">
                     <ul>
-                    <li v-for="(item,$index) in videoData" @mousedown="dragStart($event)">A{{$index+1}}</li>
+                    <li v-for="(item,$index) in videoData" @mousedown="dragStart($event,item)">A{{$index+1}}</li>
                     </ul>
                     </div>
                    
@@ -206,7 +223,8 @@
                             <li @click="fnClick(1)">1</li>
                             <li @click="fnClick(2)">2</li> 
                             <li @click="fnClick(3)">3</li> 
-                            <li @click="fnClick(4)">4</li>    
+                            <li @click="fnClick(4)">4</li>
+                            <li @click="fnClick(9)">9</li>     
                         </ul> 
                     </div>
                     <drag-box :style="drapData">qwwe</drag-box>
@@ -214,7 +232,24 @@
             data() {
                 return {
                     msg:"你好",
-                    videoData:[{},{},{},{},{}],//视频列表
+                    videoData:[
+                        {  
+                            id:1,
+                            path:"rtmp://192.168.10.248/vod/2017-9-22/录播测试20170922154756-d32f8551-f102-489a-a174-49780560fa2a.flv"
+                        },{
+                            id:22,
+                            path:"rtmp://192.168.95.248/vod/2018-5-5/中央综治办第二次会议E1525501101425-4333f21b-220b-4f60-acf3-9cd65e8ff476.flv"
+                        },{
+                            id:13,
+                            path:"rtmp://192.168.95.248/vod/2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
+                        },{
+                            id:11,
+                            path:"rtmp://192.168.95.248/vod/2018-5-14/中央综治办第二次会议E1526286157514-c64e5d8d-fccf-4bd1-b966-eda6de087530.flv"
+                        },{
+                            id:14,
+                            path:"rtmp://192.168.10.248/vod/2017-9-22/录播测试20170922154756-d32f8551-f102-489a-a174-49780560fa2a.flv"
+                        }
+                    ],//视频列表
                     boxs:[{id:1}],//编辑区元素的数据
                     liStyle:'ulB-a1',//编辑区样式
                     dragging:null,//移动状态
@@ -222,7 +257,8 @@
                     diffy:0,//移动元素与鼠标的相对偏移量
                     drapData:{top:"100px",left:"200px"}, //移动元素坐标
                     baseOffset:{},
-                    activeIndex:-1
+                    activeIndex:-1,
+                    videoObj:{},//当前视频播放数据
 
                 };
             },
@@ -257,18 +293,20 @@
                     this.liStyle="ulB-a"+$index;
                 },
                 //mouseDown
-                dragStart:function(e){
+                dragStart:function(e,$list){
                     this.drapData={
                         top:e.target.offsetTop+"px",
                         left:e.target.offsetLeft+"px",
                     }
-                    console.log(e.clientX,e.target.offsetLeft);
+                    //console.log(e.clientX,e.target.offsetLeft);
                     this.diffx=e.clientX-e.target.offsetLeft;
                     this.diffy=e.clientY-e.target.offsetTop;
                     this.dragging="target";
+                    this.videoObj=$list;
                     //获取编辑区元素的坐标数据
                     var targetEls=document.getElementsByClassName(this.liStyle)[0].children;
                     for(var i=0;i<targetEls.length;i++){
+                        //targetEls[i].id="jwplayID"+(i+1);
                         this.boxs[i].left=targetEls[i].offsetLeft;
                         this.boxs[i].top=targetEls[i].offsetTop;
                         this.boxs[i].width=targetEls[i].offsetWidth;
@@ -300,7 +338,8 @@
                              
                                if((mouseX-box.left<=box.width)&&(mouseX-box.left>0)&&(mouseY-box.top<=box.height)&&(mouseY-box.top>0)){
                                    this.activeIndex=i;
-                                   console.log(11,i);
+                                   //console.log(11,i);
+                                   break;
                                }
                             }   
                         }
@@ -314,35 +353,46 @@
                     // console.log("stop");
                     // console.log(e.target);
                     // console.log(this.$slots,1);
-                  
-                    if(this.boxs.length===1){
-
-                    }
+                   // console.log(this.activeIndex);
+                   var _this=this;
                     this.dragging=null;
                     this.drapData.display="none";
-                    var dragWidth=e.target.offsetWidth,
-                        dragHeight=e.target.offsetHeight,
-                        dragLeft=e.target.offsetLeft,
-                        dragTop=e.target.offsetTop;
-                    switch(this.boxs.length){
-                        case 1:
+                    if(this.activeIndex!==-1){
+                        var item=this.boxs[this.activeIndex];
+                        item.el.id="jwplayID"+this.videoObj.id;    
+                        item.jwplayerObj=jwplayer(item.el).setup({
+                            flashplayer: "assetjs/jwplayer/jwplayer.flash.swf",
+                            file: _this.videoObj.path,
+                            width: item.width,  //屏幕可视区
+                            height:item.height,
+                        }).utils.css('float','left');
+                        var aa=item.jwplayerObj;
+                        console.log(aa);
+                    }
+                   
+                    // var dragWidth=e.target.offsetWidth,
+                    //     dragHeight=e.target.offsetHeight,
+                    //     dragLeft=e.target.offsetLeft,
+                    //     dragTop=e.target.offsetTop;
+                    // switch(this.boxs.length){
+                    //     case 1:
                         
-                           //console.log(this.boxs[0]);
-                           var left=this.boxs[0].left,
-                               width=this.boxs[0].width,
-                               top=this.boxs[0].top,
-                               height=this.boxs[0].height;
-                           if(dragLeft>=left&&(dragLeft+dragWidth)<=(left+width)&&dragTop>=top&&(dragTop+dragHeight)<=(top+height)){
-                              console.log("limian00");
-                           }
-                           break;
-                        case 2:
-                           break;
-                        case 3:
-                           break;
-                        case 4:
-                           break; 
-                    }              
+                    //        //console.log(this.boxs[0]);
+                    //        var left=this.boxs[0].left,
+                    //            width=this.boxs[0].width,
+                    //            top=this.boxs[0].top,
+                    //            height=this.boxs[0].height;
+                    //        if(dragLeft>=left&&(dragLeft+dragWidth)<=(left+width)&&dragTop>=top&&(dragTop+dragHeight)<=(top+height)){
+                    //           console.log("limian00");
+                    //        }
+                    //        break;
+                    //     case 2:
+                    //        break;
+                    //     case 3:
+                    //        break;
+                    //     case 4:
+                    //        break; 
+                    // }              
                     //console.log(width);
                     // console.log(e.target.offsetTop);
                    
