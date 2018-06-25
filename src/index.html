@@ -217,7 +217,7 @@
                    
                     <div class="ulB fl">
                         <ul class="ulB-a" :class="liStyle">
-                            <li v-for="(item,$index) in boxs" slot="head" @mouseenter="dragEnter($event)" :class="[$index==activeIndex?'active':'']">B{{item}}</li>   
+                            <li v-for="(item,$index) in boxs" slot="head" @mouseenter="dragEnter($event)" :class="[$index==activeIndex?'active':'']"><div>B{{item}}</div></li>   
                         </ul>
                         <ul class="ulB-b">
                             <li @click="fnClick(1)">1</li>
@@ -235,13 +235,13 @@
                     videoData:[
                         {  
                             id:1,
-                            path:"rtmp://192.168.10.248/vod/2017-9-22/录播测试20170922154756-d32f8551-f102-489a-a174-49780560fa2a.flv"
+                            path:"rtmp://192.168.95.248:1935/vod/flv:2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
                         },{
                             id:22,
-                            path:"rtmp://192.168.95.248/vod/2018-5-5/中央综治办第二次会议E1525501101425-4333f21b-220b-4f60-acf3-9cd65e8ff476.flv"
+                            path:"rtmp://192.168.95.248:1935/vod/flv:2018-06-21/a8559a9c-5e3e-4ba9-9eb2-5fc4e7fc8e59.flv"
                         },{
                             id:13,
-                            path:"rtmp://192.168.95.248/vod/2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
+                            path:"rtmp://192.168.95.248:1935/vod/2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
                         },{
                             id:11,
                             path:"rtmp://192.168.95.248/vod/2018-5-14/中央综治办第二次会议E1526286157514-c64e5d8d-fccf-4bd1-b966-eda6de087530.flv"
@@ -312,10 +312,7 @@
                         this.boxs[i].width=targetEls[i].offsetWidth;
                         this.boxs[i].height=targetEls[i].offsetHeight;
                         this.boxs[i].el=targetEls[i];
-                        // console.log(util.getOffset(targetEls[i]));
                     }
-                   // console.log(e.clientX);
-                   // console.log(this.boxs);
                 },
                 //mouseMovie
                 dragMove:function(e){
@@ -338,7 +335,6 @@
                              
                                if((mouseX-box.left<=box.width)&&(mouseX-box.left>0)&&(mouseY-box.top<=box.height)&&(mouseY-box.top>0)){
                                    this.activeIndex=i;
-                                   //console.log(11,i);
                                    break;
                                }
                             }   
@@ -358,43 +354,25 @@
                     this.dragging=null;
                     this.drapData.display="none";
                     if(this.activeIndex!==-1){
-                        var item=this.boxs[this.activeIndex];
-                        item.el.id="jwplayID"+this.videoObj.id;    
-                        item.jwplayerObj=jwplayer(item.el).setup({
+                        var item=this.boxs[this.activeIndex],
+                        // item.el.id="jwplayID"+this.videoObj.id;  
+                        el=item.el.children[0]; 
+                        el.id=_this.videoObj.id;
+                        item.jwplayerObj=jwplayer(el); 
+                        item.jwplayerObj.setup({
                             flashplayer: "assetjs/jwplayer/jwplayer.flash.swf",
                             file: _this.videoObj.path,
                             width: item.width,  //屏幕可视区
                             height:item.height,
-                        }).utils.css('float','left');
-                        var aa=item.jwplayerObj;
-                        console.log(aa);
+                        });
+                        // var aa=item.jwplayerObj;
+                        console.log(item.jwplayerObj);
+                        console.log(item.jwplayerObj.getContainer());
+                        console.log(item.jwplayerObj.getPlaylist());
+                        console.log(item.jwplayerObj.getPlaylistIndex());
+                        console.log(item.jwplayerObj.getPlaylistItem());
+                        console.log(item.jwplayerObj.getBuffer());
                     }
-                   
-                    // var dragWidth=e.target.offsetWidth,
-                    //     dragHeight=e.target.offsetHeight,
-                    //     dragLeft=e.target.offsetLeft,
-                    //     dragTop=e.target.offsetTop;
-                    // switch(this.boxs.length){
-                    //     case 1:
-                        
-                    //        //console.log(this.boxs[0]);
-                    //        var left=this.boxs[0].left,
-                    //            width=this.boxs[0].width,
-                    //            top=this.boxs[0].top,
-                    //            height=this.boxs[0].height;
-                    //        if(dragLeft>=left&&(dragLeft+dragWidth)<=(left+width)&&dragTop>=top&&(dragTop+dragHeight)<=(top+height)){
-                    //           console.log("limian00");
-                    //        }
-                    //        break;
-                    //     case 2:
-                    //        break;
-                    //     case 3:
-                    //        break;
-                    //     case 4:
-                    //        break; 
-                    // }              
-                    //console.log(width);
-                    // console.log(e.target.offsetTop);
                    
                 },
                 dragEnter:function(e){
