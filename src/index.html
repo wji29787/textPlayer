@@ -58,10 +58,15 @@
     .ulB .ulB-a>li.active{
         box-shadow: 0 0 0.35rem red inset;
     }
+    .ulB .ulB-a>li>div{
+        width: 100%;
+        height: 100%;           
+    }
     .ulB .ulB-a1>li{ height: 100%; width: 100%;}
     .ulB .ulB-a2>li{height: 100%; width: 50%;}
+    .ulB .ulB-a3>li:first-of-type {height: 50%; width: 100%; }
     .ulB .ulB-a3>li{height: 50%;width: 50%;}
-    .ulB .ulB-a3>li:last-of-type { margin: 0 auto;margin-left: 200px;}
+    
     .ulB .ulB-a4>li{height: 50%;width: 50%; }
     .ulB .ulB-a9>li{height: 33.33%;width: 33.33%;}
     .ulB .ulB-b >li {
@@ -79,6 +84,7 @@
 <body>
     <div class="div">
         hahahahaSDFasdfad sdfsf 士大的aa
+        <div id="aabb" class="aacc">11111</div>
         <!-- <div  class="playab" style="width:300px;height:300px;border: 1px solid red;"></div> -->
         <!-- <div  class="playac" style="width:300px;height:300px;border: 1px solid red;"></div> -->
         <div id="app">
@@ -139,7 +145,17 @@
         // for(var prop in obj){
         //     console.log(prop+"------"+obj[prop]);
         // }
-    
+    //    var arr=[1,2,3,4,5,6,7];
+    //    for(var i=arr.length-1;i>=4;i--){
+    //           console.log(arr[i],i);
+    //           arr.splice(i,1);
+
+    //    }
+    //    console.log(arr);
+    // var aa=document.getElementById("aabb");
+    // var bb=document.getElementsByClassName("aacc")[0];
+
+    // console.log(aa==bb);
     </script>
     <script>
         // var dragDivv=Vue.extend({
@@ -169,19 +185,6 @@
              },
 
        };
-        // var div1=document.getElementById('playaa'); //
-        // var div1=document.getElementsByClassName('playab')[0];
-        // var div2=document.getElementsByClassName('playac')[0];
-        // console.log(div2);
-        // div1.id="sddd";
-        // div2.id="sefsf";
-        // var playaa=jwplayer(div1).setup({
-
-        // });
-        // var playac=jwplayer(div2).setup({
-
-        // });
-        // console.log(playaa);
         var dragDiv=Vue.component('dragBox',{
                         template:`<div class="dragDiv" :style="style"><slot></slot>{{msg}}</div>`,
                         props:{
@@ -206,7 +209,6 @@
                         }
                     });
            
-        // console.log(dragDiv);
         Vue.component('boxPlayer',{
             template:`<div class="playApp" @mousemove="dragMove($event)" @mouseup="dragStop($event)">
                    <div class="ulA fl">
@@ -259,6 +261,7 @@
                     baseOffset:{},
                     activeIndex:-1,
                     videoObj:{},//当前视频播放数据
+                    
 
                 };
             },
@@ -284,6 +287,9 @@
                 fnClick($index){
                     //drag.$mount('.playApp');
                     if($index<this.boxs.length){
+                        // for(var i=this.boxs.length-1;i>=$index-1;i--){
+
+                        // }
                       this.boxs.splice($index,this.boxs.length-$index);
                     }else{
                         while(this.boxs.length!=$index){
@@ -291,6 +297,7 @@
                         }
                     }
                     this.liStyle="ulB-a"+$index;
+
                 },
                 //mouseDown
                 dragStart:function(e,$list){
@@ -354,24 +361,70 @@
                     this.dragging=null;
                     this.drapData.display="none";
                     if(this.activeIndex!==-1){
-                        var item=this.boxs[this.activeIndex],
-                        // item.el.id="jwplayID"+this.videoObj.id;  
-                        el=item.el.children[0]; 
-                        el.id=_this.videoObj.id;
-                        item.jwplayerObj=jwplayer(el); 
-                        item.jwplayerObj.setup({
+                        var baseId="jwplayID"+_this.videoObj.id;
+                        //当前项
+                        var item=this.boxs[this.activeIndex];                       
+                        //当前项的DIV ID
+                        var el=item.el.children[0]; 
+                        var currentEl=document.getElementById(baseId);
+                        console.log(currentEl);
+                        if(currentEl){
+                            console.log(11);
+                           if(currentEl==el){
+                            console.log(22);
+                               return;
+                           }else{
+                            console.log(33);
+                            
+                               jwplayer(currentEl).remove();
+                               currentEl.id="";
+                           }
+                        }
+                        // if(el.id){
+                        //        jwplayer(el).remove();
+                        //        el.id="";
+                        // }
+                        // if(item.insTance){//当前项是否有一个实例
+                        //     if(el.id==baseId+_this.videoObj.id){//判断当前实例是否是选中的
+                        //         return;
+                        //     }else{
+                        //         // item.jwplayerObj=null;
+                        //         //移除实例
+                        //         jwplayer(el.id).remove();
+                        //         el.id="";
+                        //         item.insTance=false;
+                        //     }
+                            
+                        // }
+
+                        
+
+                        // this.boxs.forEach(function(t){
+                        //     if(t.el.children[0].id&&(t.el.children[0].id=="jwplayID"+_this.videoObj.id)){
+                        //         console.log(11);
+                        //         // t.jwplayerObj=null;
+                        //         jwplayer("jwplayID"+_this.videoObj.id).remove();
+                        //         t.el.children[0].id="";
+                        //     }
+                        // });
+                       
+                        el.id=baseId;
+                        // item.insTance=true;
+                        jwplayer(el).setup({
                             flashplayer: "assetjs/jwplayer/jwplayer.flash.swf",
                             file: _this.videoObj.path,
                             width: item.width,  //屏幕可视区
                             height:item.height,
+                            autostart: true,
                         });
                         // var aa=item.jwplayerObj;
-                        console.log(item.jwplayerObj);
-                        console.log(item.jwplayerObj.getContainer());
-                        console.log(item.jwplayerObj.getPlaylist());
-                        console.log(item.jwplayerObj.getPlaylistIndex());
-                        console.log(item.jwplayerObj.getPlaylistItem());
-                        console.log(item.jwplayerObj.getBuffer());
+                        // console.log(item.jwplayerObj.setFullscreen(false));
+                        // console.log(item.jwplayerObj.getFullscreen());
+                        // console.log(item.jwplayerObj.getContainer());//返回当前容器
+                        // console.log(item.jwplayerObj.getPlaylist());
+                        // console.log(item.jwplayerObj.getPlaylistIndex());
+                        // console.log(item.jwplayerObj.getPlaylistItem());
+                        // console.log(item.jwplayerObj.getBuffer());
                     }
                    
                 },
