@@ -14,84 +14,118 @@
     <script src="./assetjs/jwplayer/jwplayer.js"></script>
 </head>
 <style>
-    .playApp{
+    .playApp {
         position: relative;
         height: 900px;
     }
-    .ulA{
+
+    .ulA {
         width: 100px;
         height: 100%;
         margin-right: 100px;
-     }
-    .ulA ul>li{
-      width: 100px;
-      height: 50px;
-      border: 1px solid gold;
-      user-select:none;
-      -webkit-user-select:none; 
-      -moz-user-select: -moz-none; 
-      -moz-user-select: none; 
     }
-    .dragDiv{
-      position: absolute; 
-      width: 100px;
-      height: 50px;
-      border: 1px solid red; 
-      user-select:none;
-      -webkit-user-select:none; 
-      -moz-user-select: -moz-none; 
-      -moz-user-select: none; 
+
+    .ulA ul>li {
+        width: 100px;
+        height: 50px;
+        border: 1px solid gold;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: -moz-none;
+        -moz-user-select: none;
     }
+
+    .dragDiv {
+        position: absolute;
+        width: 100px;
+        height: 50px;
+        border: 1px solid red;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: -moz-none;
+        -moz-user-select: none;
+    }
+
     .ulB {
         height: 100%;
         width: 800px;
         /* border: 1px solid gold; */
     }
-    .ulB .ulB-a{
+
+    .ulB .ulB-a {
         width: 100%;
         height: calc(100% - 100px);
     }
-    .ulB .ulB-a>li{
+
+    .ulB .ulB-a>li {
         float: left;
-        background-color:greenyellow;
+        background-color: greenyellow;
     }
-    .ulB .ulB-a>li.active{
+
+    .ulB .ulB-a>li.active {
         box-shadow: 0 0 0.35rem red inset;
     }
-    .ulB .ulB-a>li>div{
+
+    .ulB .ulB-a>li>div {
         width: 100%;
-        height: 100%;           
+        height: 100%;
     }
-    .ulB .ulB-a1>li{ height: 100%; width: 100%;}
-    .ulB .ulB-a2>li{height: 100%; width: 50%;}
-    .ulB .ulB-a3>li:first-of-type {height: 50%; width: 100%; }
-    .ulB .ulB-a3>li{height: 50%;width: 50%;}
-    
-    .ulB .ulB-a4>li{height: 50%;width: 50%; }
-    .ulB .ulB-a9>li{height: 33.33%;width: 33.33%;}
-    .ulB .ulB-b >li {
+
+    .ulB .ulB-a1>li {
+        height: 100%;
+        width: 100%;
+    }
+
+    .ulB .ulB-a2>li {
+        height: 100%;
+        width: 50%;
+    }
+
+    .ulB .ulB-a3>li:first-of-type {
+        height: 50%;
+        width: 100%;
+    }
+
+    .ulB .ulB-a3>li {
+        height: 50%;
+        width: 50%;
+    }
+
+    .ulB .ulB-a4>li {
+        height: 50%;
+        width: 50%;
+    }
+
+    .ulB .ulB-a9>li {
+        height: 33.33%;
+        width: 33.33%;
+    }
+
+    .ulB .ulB-b>li {
         float: left;
         margin-right: 20px;
         width: 100px;
         height: 50px;
         background-color: skyblue;
-    
+
     }
-    .div{
+
+    .div {
         margin-left: 100px;
     }
 </style>
+
 <body>
     <div class="div">
         hahahahaSDFasdfad sdfsf 士大的aa
-        <div id="aabb" class="aacc">11111</div>
+        <div id="aa" class="aacc">11111</div>
         <!-- <div  class="playab" style="width:300px;height:300px;border: 1px solid red;"></div> -->
         <!-- <div  class="playac" style="width:300px;height:300px;border: 1px solid red;"></div> -->
         <div id="app">
-        
-            </div>
+
+        </div>
     </div>
-    
+
     <!-- <div>
         <form action="upload" method="POST" enctype="multipart/form-data">
              <input type="file" name="file"/>
@@ -99,7 +133,7 @@
              <input type="submit" value="submit" name="submit">
         </form>
     </div> -->
-    
+
     <script>
         // var ab={a:1,b:2};
         // //alert('a' in ab);
@@ -145,17 +179,29 @@
         // for(var prop in obj){
         //     console.log(prop+"------"+obj[prop]);
         // }
-    //    var arr=[1,2,3,4,5,6,7];
-    //    for(var i=arr.length-1;i>=4;i--){
-    //           console.log(arr[i],i);
-    //           arr.splice(i,1);
+        //    var arr=[1,2,3,4,5,6,7];
+        //    for(var i=arr.length-1;i>=4;i--){
+        //           console.log(arr[i],i);
+        //           arr.splice(i,1);
 
-    //    }
-    //    console.log(arr);
-    // var aa=document.getElementById("aabb");
-    // var bb=document.getElementsByClassName("aacc")[0];
+        //    }
+        //    console.log(arr);
+        // var aa=document.getElementById("aabb");
+        // //  aa.id="ss";
+        //   console.log(aa);
+        // var bb=document.getElementsByClassName("aac")[0];
+        // console.log(aa);
+        //    bb.id="zz";
+        // console.log(bb.attributes;
+        // var haha=[];
+        // for(var k in bb.attributes){
+        //      if(bb.attributes.hasOwnProperty(k)){
+        //         haha.push(bb.attributes[k]);
+        //         console.log(bb.attributes[k].value==0);
+        //      } 
 
-    // console.log(aa==bb);
+        // }
+        // console.log(haha);
     </script>
     <script>
         // var dragDivv=Vue.extend({
@@ -166,51 +212,149 @@
         //         }
         //     }
         // });
-       // var  drag=new dragDivv();
-       // drag.$mount('.playApp');
-       var util={
-           //相对视窗的偏离位置
-             getOffset:function(el){
-                 var offSet={
-                     top:0,
-                     left:0
-                 },node=el;
+        // var  drag=new dragDivv();
+        // drag.$mount('.playApp');
+        var util = {
+            //相对视窗的偏离位置
+            getOffset: function (el) {
+                var offSet = {
+                        top: 0,
+                        left: 0
+                    },
+                    node = el;
 
-                 while(node!==null){
-                     offSet.left+=node.offsetLeft;
-                     offSet.top+=node.offsetTop;
-                     node=node.offsetParent;
-                 }
-                 return offSet;
-             },
+                while (node !== null) {
+                    offSet.left += node.offsetLeft;
+                    offSet.top += node.offsetTop;
+                    node = node.offsetParent;
+                }
+                return offSet;
+            },
+            DragDrop: function () {
+                var dragging = null,
+                    diffx = 0,
+                    diffy = 0,
+                    dragdrop = new EventTarget();
 
-       };
-        var dragDiv=Vue.component('dragBox',{
-                        template:`<div class="dragDiv" :style="style"><slot></slot>{{msg}}</div>`,
-                        props:{
-                          style:{
-                              type:Object,
-                              default:function(){
-                                return{
-                                  top :"50px",
-                                  left:"100px",
-                                  display:"none"
-                                }
-                              }
+                function handleEvent(event) {
+                    //获取事件和目标
+                    event = EventUtil.getEvent(event);
+                    var target = EventUtil.getTarget(event);
+                    //确定事件类型
+                    switch (event.type) {
+                        case "mousedown":
+                            if (target.className.indexOf("draggable") > -1) {
+                                dragging = target;
+                                diffx = event.clientX - target.offsetLeft;
+                                diffy = event.clientY - target.offsetTop;
+                                dragdrop.fire({
+                                    type: "dragstart",
+                                    target: dragging,
+                                    X: event.clientX,
+                                    y: event.clientY
+                                });
                             }
-                        },
-                        data:function(){
-                            return{
-                                msg:"I AM drag"
+                            event.preventDefault();
+                            break;
+                        case "mousemove":
+                            if (dragging !== null) {
+                                //指定位置
+
+                                console.log(2);
+                                dragging.style.left = (event.clientX - diffx) + "px";
+                                dragging.style.top = (event.clientY - diffy) + "px";
+                                //触发自定义事件
+                                dragdrop.fire({
+                                    type: "drag",
+                                    target: dragging,
+                                    x: event.clientX,
+                                    y: event.clientY
+                                });
                             }
-                        },
-                        created:function(){
-                            console.log(this.$attrs,22);
+                            break;
+                        case "mouseup":
+                            dragdrop.fire({
+                                type: "dragend",
+                                target: dragging,
+                                x: event.clientX,
+                                y: event.clientY
+                            });
+                            dragging = null;
+                            break;
+                    }
+                }
+                //公共接口
+
+                dragdrop.enable = function () {
+                    EventUtil.addHandler(document, "mousedown", handleEvent);
+                    EventUtil.addHandler(document, "mousemove", handleEvent);
+                    EventUtil.addHandler(document, "mouseup", handleEvent);
+                };
+                dragdrop.disable = function () {
+                    EventUtil.removeHandler(document, "mousedown", handleEvent);
+                    EventUtil.removeHandler(document, "mousemove", handleEvent);
+                    EventUtil.removeHandler(document, "mouseup", handleEvent);
+                };
+                return dragdrop;
+            },
+
+        };
+        //挂在播放器插件
+        Vue.prototype.$jwplayer = jwplayer;
+        //移动的盒子
+        var dragDiv = {
+            template: `<div class="dragDiv" :style="style"><slot></slot>{{msg}}</div>`,
+            props: {
+                style: {
+                    type: Object,
+                    default: function () {
+                        return {
+                            top: "50px",
+                            left: "100px",
+                            display: "none"
                         }
-                    });
-           
-        Vue.component('boxPlayer',{
-            template:`<div class="playApp" @mousemove="dragMove($event)" @mouseup="dragStop($event)">
+                    }
+                }
+            },
+            data: function () {
+                return {
+                    msg: "I AM drag"
+                }
+            },
+            created: function () {
+                console.log(this.$attrs, 22);
+            }
+        };
+        //拖动进度条
+        var processBar = {
+            template: `<div>
+                <div class="progress" @mousedown="mousedownHandler" @mouseover="mouseoverHandler"
+                    @mousemove="mousemoveHandler" @mouseup="mouseupHandler" :style="pBarStyle">
+                    <div class="left" :style="leftStyle">
+                        <div class="ball" :style="ballStyle"></div>
+                    </div>
+                    <slot></slot>
+                </div>
+            
+            </div>`,
+            props: {
+
+            },
+            data: function () {
+                return {
+
+                }
+            },
+            created: function () {
+
+            },
+            methods: {
+
+            }
+        }
+       //编辑区域
+        Vue.component('boxPlayer', {
+            template: `<div class="playApp" @mousemove="dragMove($event)" @mouseup="dragStop($event)">
                    <div class="ulA fl">
                     <ul>
                     <li v-for="(item,$index) in videoData" @mousedown="dragStart($event,item)">A{{$index+1}}</li>
@@ -221,7 +365,8 @@
                         <ul class="ulB-a" :class="liStyle">
                             <li v-for="(item,$index) in boxs" slot="head" @mouseenter="dragEnter($event)" :class="[$index==activeIndex?'active':'']"><div>B{{item}}</div></li>   
                         </ul>
-                        <ul class="ulB-b">
+                        <div class="time-axis">111</div> 
+                        <ul class="ulB-b clearfix">
                             <li @click="fnClick(1)">1</li>
                             <li @click="fnClick(2)">2</li> 
                             <li @click="fnClick(3)">3</li> 
@@ -229,195 +374,197 @@
                             <li @click="fnClick(9)">9</li>     
                         </ul> 
                     </div>
-                    <drag-box :style="drapData">qwwe</drag-box>
+                    <drag-box :style="dragData">qwwe</drag-box>
                 </div>`,
             data() {
                 return {
-                    msg:"你好",
-                    videoData:[
-                        {  
-                            id:1,
-                            path:"rtmp://192.168.95.248:1935/vod/flv:2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
-                        },{
-                            id:22,
-                            path:"rtmp://192.168.95.248:1935/vod/flv:2018-06-21/a8559a9c-5e3e-4ba9-9eb2-5fc4e7fc8e59.flv"
-                        },{
-                            id:13,
-                            path:"rtmp://192.168.95.248:1935/vod/2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
-                        },{
-                            id:11,
-                            path:"rtmp://192.168.95.248/vod/2018-5-14/中央综治办第二次会议E1526286157514-c64e5d8d-fccf-4bd1-b966-eda6de087530.flv"
-                        },{
-                            id:14,
-                            path:"rtmp://192.168.10.248/vod/2017-9-22/录播测试20170922154756-d32f8551-f102-489a-a174-49780560fa2a.flv"
-                        }
-                    ],//视频列表
-                    boxs:[{id:1}],//编辑区元素的数据
-                    liStyle:'ulB-a1',//编辑区样式
-                    dragging:null,//移动状态
-                    diffx:0,
-                    diffy:0,//移动元素与鼠标的相对偏移量
-                    drapData:{top:"100px",left:"200px"}, //移动元素坐标
-                    baseOffset:{},
-                    activeIndex:-1,
-                    videoObj:{},//当前视频播放数据
-                    
+                    msg: "你好",
+                    videoData: [{
+                        id: 1,
+                        path: "rtmp://192.168.95.248:1935/vod/flv:2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
+                    }, {
+                        id: 22,
+                        path: "rtmp://192.168.95.248:1935/vod/flv:2018-06-21/a8559a9c-5e3e-4ba9-9eb2-5fc4e7fc8e59.flv"
+                    }, {
+                        id: 13,
+                        path: "rtmp://192.168.95.248:1935/vod/2018-5-11/中央综治办第二次会议E1526036974737-3f0f7989-1d75-4465-b3f4-c015b0493a2b.flv"
+                    }, {
+                        id: 11,
+                        path: "rtmp://192.168.95.248/vod/2018-5-14/中央综治办第二次会议E1526286157514-c64e5d8d-fccf-4bd1-b966-eda6de087530.flv"
+                    }, {
+                        id: 14,
+                        path: "rtmp://192.168.10.248/vod/2017-9-22/录播测试20170922154756-d32f8551-f102-489a-a174-49780560fa2a.flv"
+                    }], //视频列表
+                    boxs: [{
+                        id: 1
+                    }], //编辑区元素的数据
+                    liStyle: 'ulB-a1', //编辑区样式
+                    dragging: null, //移动状态
+                    diffx: 0,
+                    diffy: 0, //移动元素与鼠标的相对偏移量
+                    dragData: {
+                        top: "100px",
+                        left: "200px"
+                    }, //移动元素坐标
+                    baseOffset: {},
+                    activeIndex: -1,
+                    videoObj: {}, //当前视频播放数据
+                    dragDivOffset:{}
+
 
                 };
             },
-            created () {
-                
+            created() {
+                // this.getEditCoodinate();
             },
-            mounted () {
-                var playApp=document.getElementsByClassName('playApp'),
-                    playAppOffset=util.getOffset(playApp[0]),//相对窗口的偏移
-                    playUla=document.getElementsByClassName('ulB-a'),
-                    playUlaOffset={     //相对父元素的偏移
-                        top:playUla[0].offsetTop,
-                        left:playUla[0].offsetLeft,
-                        width:playUla[0].offsetWidth,
-                        height:playUla[0].offsetHeight
+            components: {
+                'dragBox': dragDiv
+            },
+            mounted() {
+                var playApp = document.getElementsByClassName('playApp'),
+                    playAppOffset = util.getOffset(playApp[0]), //相对窗口的偏移
+                    playUla = document.getElementsByClassName('ulB-a'),
+                    playUlaOffset = { //相对父元素的偏移
+                        top: playUla[0].offsetTop,
+                        left: playUla[0].offsetLeft,
+                        width: playUla[0].offsetWidth,
+                        height: playUla[0].offsetHeight
                     };
-                    this.baseOffset.playAppOffset=playAppOffset;
-                    this.baseOffset.playUlaOffset=playUlaOffset;
-                // playUlaOffset.top=
-                //console.log(playUlaOffset);
+                //相对偏移量
+                this.baseOffset.playAppOffset = playAppOffset;
+                this.baseOffset.playUlaOffset = playUlaOffset;
+                //初始元素的坐标
+                this.getEditCoodinate();
+
             },
             methods: {
-                fnClick($index){
-                    //drag.$mount('.playApp');
-                    if($index<this.boxs.length){
-                        // for(var i=this.boxs.length-1;i>=$index-1;i--){
-
-                        // }
-                      this.boxs.splice($index,this.boxs.length-$index);
-                    }else{
-                        while(this.boxs.length!=$index){
-                             this.boxs.push({id:this.boxs.length+1});
+                fnClick($index) {
+                    if (this.boxs.length == $index) {
+                        return;
+                    }
+                    if ($index < this.boxs.length) {
+                        this.boxs.splice($index, this.boxs.length - $index);
+                    } else {
+                        while (this.boxs.length != $index) {
+                            this.boxs.push({
+                                id: this.boxs.length + 1
+                            });
                         }
                     }
-                    this.liStyle="ulB-a"+$index;
+                    this.liStyle = "ulB-a" + $index;
+                    //每次更改后 更新坐标
+                    this.$nextTick(function () {
+                        this.getEditCoodinate();
+                    });
 
+                },
+                 //获取编辑区元素的坐标
+                getEditCoodinate: function () {
+                    //获取编辑区元素的坐标数据
+                    var targetEls = document.getElementsByClassName(this.liStyle)[0].children;
+                    //console.log(targetEls);
+                    for (var i = 0; i < targetEls.length; i++) {
+                        //合并对象并确保数据为响应式
+                        var item = Object.assign({}, this.boxs[i], {
+                            left: targetEls[i].offsetLeft,
+                            top: targetEls[i].offsetTop,
+                            width: targetEls[i].offsetWidth,
+                            height: targetEls[i].offsetHeight,
+                            el: targetEls[i]
+                        });
+                        this.$set(this.boxs, i, item);
+                        //当视图布局改变时,更新播放实例的大小
+                        if (targetEls[i].children[0].id) {
+                            this.$jwplayer(targetEls[i].children[0]).resize(targetEls[i].offsetWidth,
+                                targetEls[i].offsetHeight);
+                        }
+                    }
                 },
                 //mouseDown
-                dragStart:function(e,$list){
-                    this.drapData={
-                        top:e.target.offsetTop+"px",
-                        left:e.target.offsetLeft+"px",
+                dragStart: function (e, $list) {
+                    this.drapData = {
+                        top: e.target.offsetTop + "px",
+                        left: e.target.offsetLeft + "px",
                     }
-                    //console.log(e.clientX,e.target.offsetLeft);
-                    this.diffx=e.clientX-e.target.offsetLeft;
-                    this.diffy=e.clientY-e.target.offsetTop;
-                    this.dragging="target";
-                    this.videoObj=$list;
-                    //获取编辑区元素的坐标数据
-                    var targetEls=document.getElementsByClassName(this.liStyle)[0].children;
-                    for(var i=0;i<targetEls.length;i++){
-                        //targetEls[i].id="jwplayID"+(i+1);
-                        this.boxs[i].left=targetEls[i].offsetLeft;
-                        this.boxs[i].top=targetEls[i].offsetTop;
-                        this.boxs[i].width=targetEls[i].offsetWidth;
-                        this.boxs[i].height=targetEls[i].offsetHeight;
-                        this.boxs[i].el=targetEls[i];
-                    }
+                    this.diffx = e.clientX - e.target.offsetLeft;
+                    this.diffy = e.clientY - e.target.offsetTop;
+                    this.dragging = "target";
+                    this.videoObj = $list;
+                    this.dragDivOffset.width=e.target.offsetWidth;
+                    this.dragDivOffset.height=e.target.offsetHeight;
+
                 },
                 //mouseMovie
-                dragMove:function(e){
-                    this.activeIndex=-1;
-                     if(this.dragging!==null){
-                         //var top;
+                dragMove: function (e) {
+                    this.activeIndex = -1;
+                    if (this.dragging !== null) {
+                        //var top;
                         console.log("move");
-                        
-                        this.drapData={
-                            top:(e.clientY-this.diffy)<0?0:(e.clientY-this.diffy)+"px",
-                            left:(e.clientX-this.diffx)<0?0:(e.clientX-this.diffx)+"px",
-                            display:"block"
+                        var top= e.clientY - this.diffy;
+                        var left=  e.clientX - this.diffx;
+                        var playUlaOffset=this.baseOffset.playUlaOffset;
+                        console.log(top);
+                        this.dragData = {
+                            top: top < 0 ? 0 : (top+this.dragDivOffset.height)>playUlaOffset.height ? (playUlaOffset.height-this.dragDivOffset.height):top + "px",
+                            left: left < 0 ? 0 :(left+this.dragDivOffset.width)>(playUlaOffset.left+playUlaOffset.width) ? (playUlaOffset.left+playUlaOffset.width-this.dragDivOffset.width): top + "px",
+                            display: "block"
                         }
-                        var mouseX=e.clientX-this.baseOffset.playAppOffset.left;
-                        var mouseY=e.clientY-this.baseOffset.playAppOffset.top;
-                        if(mouseX>=this.baseOffset.playUlaOffset.left&&mouseY>=this.baseOffset.playUlaOffset.top){
+                        //鼠标的坐标
+                        var mouseX = e.clientX - this.baseOffset.playAppOffset.left;
+                        var mouseY = e.clientY - this.baseOffset.playAppOffset.top;
+                        if (mouseX >= this.baseOffset.playUlaOffset.left && mouseY >= this.baseOffset.playUlaOffset
+                            .top) {
                             //  console.log(11);
-                            for(var i=0;i<this.boxs.length;i++){
-                                var box=this.boxs[i];
-                             
-                               if((mouseX-box.left<=box.width)&&(mouseX-box.left>0)&&(mouseY-box.top<=box.height)&&(mouseY-box.top>0)){
-                                   this.activeIndex=i;
-                                   break;
-                               }
-                            }   
+                            for (var i = 0; i < this.boxs.length; i++) {
+                                var box = this.boxs[i];
+
+                                if ((mouseX - box.left <= box.width) && (mouseX - box.left > 0) && (mouseY -
+                                        box.top <= box.height) && (mouseY - box.top > 0)) {
+                                    this.activeIndex = i;
+                                    break;
+                                }
+                            }
                         }
-                        
-                        // console.log(e.target);
-                     }
+
+                    }
                 },
                 //mouseUp
-                dragStop:function(e){
-                    // console.log(e.target);
-                    // console.log("stop");
-                    // console.log(e.target);
-                    // console.log(this.$slots,1);
-                   // console.log(this.activeIndex);
-                   var _this=this;
-                    this.dragging=null;
-                    this.drapData.display="none";
-                    if(this.activeIndex!==-1){
-                        var baseId="jwplayID"+_this.videoObj.id;
+                dragStop: function (e) {
+                    var _this = this;
+                    //鼠标松开时 ，隐藏dragdiv并触发播放事件
+                    this.dragging = null;
+                    this.dragData.display = "none";
+                    if (this.activeIndex !== -1) {
+                        var baseId = "jwplayID" + _this.videoObj.id;
                         //当前项
-                        var item=this.boxs[this.activeIndex];                       
+                        var item = this.boxs[this.activeIndex];
                         //当前项的DIV ID
-                        var el=item.el.children[0]; 
-                        var currentEl=document.getElementById(baseId);
-                        console.log(currentEl);
-                        if(currentEl){
-                            console.log(11);
-                           if(currentEl==el){
-                            console.log(22);
-                               return;
-                           }else{
-                            console.log(33);
-                            
-                               jwplayer(currentEl).remove();
-                               currentEl.id="";
-                           }
+                        var el = this.boxs[this.activeIndex].el;
+                        //检测编辑区是否有正在播放的实例 并且是否是播放的当前项，否 清除
+                        var currentEl = document.getElementById(baseId);
+                        if (currentEl) {
+                            if (currentEl == el.children[0]) {
+                                return;
+                            } else {
+                                this.$jwplayer(currentEl).remove();
+                                document.getElementById(baseId).id = "";
+                                currentEl = null;
+                            }
                         }
-                        // if(el.id){
-                        //        jwplayer(el).remove();
-                        //        el.id="";
-                        // }
-                        // if(item.insTance){//当前项是否有一个实例
-                        //     if(el.id==baseId+_this.videoObj.id){//判断当前实例是否是选中的
-                        //         return;
-                        //     }else{
-                        //         // item.jwplayerObj=null;
-                        //         //移除实例
-                        //         jwplayer(el.id).remove();
-                        //         el.id="";
-                        //         item.insTance=false;
-                        //     }
-                            
-                        // }
-
-                        
-
-                        // this.boxs.forEach(function(t){
-                        //     if(t.el.children[0].id&&(t.el.children[0].id=="jwplayID"+_this.videoObj.id)){
-                        //         console.log(11);
-                        //         // t.jwplayerObj=null;
-                        //         jwplayer("jwplayID"+_this.videoObj.id).remove();
-                        //         t.el.children[0].id="";
-                        //     }
-                        // });
-                       
-                        el.id=baseId;
-                        // item.insTance=true;
-                        jwplayer(el).setup({
+                        //检测当前项是否有正在播放的实例 ，如果有 清除
+                        if (el.children[0].id) {
+                            this.$jwplayer(el.children[0]).remove();
+                            el.children[0].id = "";
+                        }
+                        //生成播放实例
+                        el.children[0].id = baseId;
+                        this.$jwplayer(baseId).setup({
                             flashplayer: "assetjs/jwplayer/jwplayer.flash.swf",
                             file: _this.videoObj.path,
-                            width: item.width,  //屏幕可视区
-                            height:item.height,
+                            width: item.width, //屏幕可视区
+                            height: item.height,
                             autostart: true,
                         });
-                        // var aa=item.jwplayerObj;
                         // console.log(item.jwplayerObj.setFullscreen(false));
                         // console.log(item.jwplayerObj.getFullscreen());
                         // console.log(item.jwplayerObj.getContainer());//返回当前容器
@@ -426,96 +573,26 @@
                         // console.log(item.jwplayerObj.getPlaylistItem());
                         // console.log(item.jwplayerObj.getBuffer());
                     }
-                   
-                },
-                dragEnter:function(e){
-                    //   console.log(e.target);
-                    //  if(this.dragging!==null){
-                    //     console.log(11);
-                    //     console.log("enter");
 
-                    //  }
                 },
-                DragDrop:function(){
-                    var dragging=null,
-                        diffx=0,
-                        diffy=0,
-                        dragdrop=new EventTarget();
+                dragEnter: function (e) {
 
-                    function handleEvent(event) {
-                        //获取事件和目标
-                        event=EventUtil.getEvent(event);
-                        var target=EventUtil.getTarget(event);
-                        //确定事件类型
-                        switch(event.type){
-                            case "mousedown":
-                                if(target.className.indexOf("draggable")>-1){
-                                    dragging=target;
-                                    diffx=event.clientX-target.offsetLeft;
-                                    diffy=event.clientY-target.offsetTop;
-                                    dragdrop.fire({type:"dragstart",target:dragging,X:event.clientX,y:event.clientY});
-                                }
-                                event.preventDefault();
-                                break;
-                            case "mousemove":
-                                if(dragging!==null){
-                                    //指定位置
-        //							if(dragging.offsetLeft<0){
-        //                                dragging.style.left=0;
-        //							}else if(dragging.offsetLeft+dragging.offsetWidth>=docwidth){
-        //                                dragging.style.left=(docwidth-dragging.offsetWidth)+"px";
-        //							}else {
-        //
-        //							}
-        //
-        //                            if(dragging.offsetTop<0){
-        //                                dragging.style.top=0;
-        //                            }else if(dragging.offsetTop+dragging.offsetHeight>=docheight){
-        //                                dragging.style.top=(docheight-dragging.offsetHeight)+"px";
-        //                            }else {
-        //
-        //                            }
-                                    console.log(2);
-                                    dragging.style.left=(event.clientX-diffx)+"px";
-                                    dragging.style.top=(event.clientY-diffy)+"px";
-                                    //触发自定义事件
-                                    dragdrop.fire({type:"drag",target:dragging,x:event.clientX,y:event.clientY});
-                                }
-                                break;
-                            case "mouseup":
-                                dragdrop.fire({type:"dragend",target:dragging,x:event.clientX,y:event.clientY});
-                                dragging=null;
-                                break;
-                        }
-                    }
-                    //公共接口
-
-                        dragdrop.enable=function () {
-                            EventUtil.addHandler(document,"mousedown",handleEvent);
-                            EventUtil.addHandler(document,"mousemove",handleEvent);
-                            EventUtil.addHandler(document,"mouseup",handleEvent);
-                        };
-                        dragdrop.disable=function () {
-                            EventUtil.removeHandler(document,"mousedown",handleEvent);
-                            EventUtil.removeHandler(document,"mousemove",handleEvent);
-                            EventUtil.removeHandler(document,"mouseup",handleEvent);
-                        };
-                        return dragdrop;
                 },
+
 
             }
 
         });
-            
-        var vm=new Vue({
-            el:"#app",
-            data:{
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
 
             },
-            created:function(){
+            created: function () {
                 console.log(Vue.version);
             },
-            render:c=> c('box-player')
+            render: c => c('box-player')
 
         })
     </script>
