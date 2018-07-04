@@ -6,7 +6,15 @@
   "directories": {
     "test": "test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "formidable": "^1.2.1",
+    "koa": "^2.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa-views": "^6.1.4",
+    "mongoose": "^5.2.1"
+  },
   "devDependencies": {
     "browser-sync": "^2.24.4",
     "gulp": "^3.9.1",
@@ -15,8 +23,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"gulp",
-    "demo":"node ./src/js/demo.js"
+    "start": "gulp",
+    "demo": "node ./src/js/demo.js"
   },
   "keywords": [],
   "author": "",
